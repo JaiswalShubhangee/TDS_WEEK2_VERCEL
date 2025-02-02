@@ -26,8 +26,8 @@ def get_marks():
     response.headers.add('Access-Control-Allow-Origin', '*')
     return response
 
-if __name__ == '__main__':
-    app.run(debug=True)
-
-
+# Define the handler for the serverless function
+def handler(event, context):
+    with app.test_request_context(event['path'], method='GET', args=event['queryStringParameters']):
+        return app.full_dispatch_request()
 
